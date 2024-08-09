@@ -1,5 +1,13 @@
 version: "3.7"
 services:
+  react:
+    image: node:latest
+    command: npm run dev -- --host
+    working_dir: /app
+    volumes:
+      - ./ghi/app:/app
+    ports:
+      - "5173:5173"
   monolith:
     build:
       context: ./monolith
@@ -80,7 +88,7 @@ services:
   web:
     image: nginx
     volumes:
-      - ./ghi:/usr/share/nginx/html:ro
+      - ./ghi/app/dist:/usr/share/nginx/html:ro
     ports:
       - "3000:80"
   database:
