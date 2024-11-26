@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const response = await fetch(url)
-        caign[ uf]
+
         if (!response.ok) {
             alert('Failed to load conferences')
 
