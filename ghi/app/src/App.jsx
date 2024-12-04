@@ -5,7 +5,7 @@ import './App.css'
 
 
 function App(props) {
-  const navLinks = ["Home", "Link 1", "Contact Us", "Resources"]
+  const navLinks = ["Home", "New Location", "New Conference"]
 
 
   return (
