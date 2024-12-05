@@ -5,12 +5,9 @@ import './App.css'
 
 
 function App(props) {
-  const navLinks = ["Home", "New Location", "New Conference"]
-
-
   return (
     <>
-      <Nav navLinks={navLinks}/>
+      <Nav />
       <div className="container">
         <LocationForm />
         {/* <AttendeesList attendees={props.attendees} /> */}

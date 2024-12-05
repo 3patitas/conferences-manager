@@ -1,6 +1,4 @@
-function Nav(props) {
-
-    const navLinks = props.navLinks
+function Nav() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -19,13 +17,15 @@ function Nav(props) {
                             <li className="nav-item">
                                 <a className="nav-link" aria-current="page" href="new-conference.html">New conference</a>
                             </li>
+                            <li className="nav-item">
+                                <a className="nav-link" aria-current="page" href="new-presentation.html">New presentation</a>
+                            </li>
                         </ul>
                     </div>
             </div>
         </nav>
     )
 }
-                {/* {navLinks.map(link => <li key={link} className="nav-item">{link}</li>)} */}
 
 
 export default Nav;

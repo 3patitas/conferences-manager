@@ -46,16 +46,42 @@ function LocationForm(props) {
         setCity(value)
     }
 
-    const handleSubmit = (event) => {
-        const data = {}
+    const handleSubmit = async (event) => {
+        event.preventDefault()
 
+        const data = {}
         data.room_count = roomCount
         data.name = name
         data.city = city
         data.state = state
-
         console.log(data)
 
+        const locationURL = 'http://localhost:8000/api/locations/'
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+
+        try {
+            const response = await fetch(locationURL, fetchConfig)
+            if (response.ok) {
+                const newLocation = await response.json()
+                console.log(newLocation)
+
+                setName('')
+                setRoomCount('')
+                setCity('')
+                setState('')
+
+            } else {
+                console.error(`Error: ${response.status} ${response.statusText}`)
+            }
+        } catch (error) {
+            console.error('Fetch error:', error)
+        }
     }
 
     return (
@@ -65,19 +91,19 @@ function LocationForm(props) {
                     <h1>Create a new location</h1>
                     <form onSubmit={handleSubmit} id="create-location-form">
                         <div className="form-floating mb-3">
-                            <input onChange={handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+                            <input onChange={handleNameChange} placeholder="Name" required value={name} type="text" name="name" id="name" className="form-control"/>
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handleRoomCountChange} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
+                            <input onChange={handleRoomCountChange} placeholder="Room count" required value={roomCount} type="number" name="room_count" id="room_count" className="form-control"/>
                             <label htmlFor="room_count">Room count</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handleCityChange} placeholder="City" required type="text" name="city" id="city" className="form-control"/>
+                            <input onChange={handleCityChange} placeholder="City" required value={city} type="text" name="city" id="city" className="form-control"/>
                             <label htmlFor="city">City</label>
                         </div>
                         <div className="mb-3">
-                            <select onChange={handleSelectedState} required name="state" id="state" className="form-select">
+                            <select onChange={handleSelectedState} required value={state} name="state" id="state" className="form-select">
                                 <option value="">Choose a state</option>
                                 {states.map(state => {
                                     return (
